@@ -100,9 +100,99 @@ if ((numeroUno < 1 || numeroUno > 10) || (numeroDos < 1 || numeroDos > 10) || (n
 
 
 //Juan tiene N dólares, David tiene la mitad de lo que posee Juan y José la mitad de lo que poseen Juan y David juntos. Mostrar el promedio de  la cantidad de dinero que tienen entre los tres y redondearlo
+//si promedio>10 mostrar excelente, si no, mostrar 'Juan debe ganar mas dinero'
 
 
+let dolaresDeJuan = parseFloat(prompt('Juan, ¿cuánto dinero tienes?'));
 
+let cuantoTieneDavid = dolaresDeJuan / 2;
+let cuantoTieneJose = (dolaresDeJuan + cuantoTieneDavid) / 2;
+let promedioJDJ = round((dolaresDeJuan + cuantoTieneDavid + cuantoTieneJose) / 3);
+
+let respuesta = (promedioJDJ > 10) ? 'Excelente' : 'Juan debe ganar mas dinero';
+
+//guardarlo een array
+let arrayMultidimensional = [['juan', dolaresDeJuan], ['david', cuantoTieneDavid], ['jose', cuantoTieneJose]];
+
+
+//Objeto Array
+//Los arrays son un tipo de dato quee peermit almacenar colecciones de datos. Dentro de un array podemos guardad muchos tipos de datos diferentes, incluidos otros arrays. Su uso más frecuente es almacenar datos siguiendo un mismo criterio. Los arrays se declaran corchetes.
+
+let comidasFavoritas = ['Napolitana', 'Raviolis', 'Pizza'];
+
+//los arrays comienzan en la posición 0
+comidasFavoritas[0]; //deevuelve Napolitana
+
+console.log(comidasFavoritas[0]);
+
+//podemos saber la longitud usando length
+
+consolee.log(comidasFavoritas.length); //3
+
+//para reemplazar un valor simplemeentee acceedemos a su posición y le asignamos el nuevo valor
+
+comidasFavoritas[1] = 'Lasaña';
+console.log(comidasFavoritas);
+
+//podemos añadir posiciones que no existan aún en el array y dejar sin definir las anterioreees
+
+comidasFavoritas[10] = 'Espaguetis Boloñesa';
+//een eeste caso declaramos valor de posición 10 y estamos dejando sin inicializar las posiciones 4 a la 9
+
+
+//un array puedee contener arrays de datos. se llaman arrays multidimensionales
+let studentsData = [['Jack', 24], ['Sara', 23], ['Peter', 25]];
+console.log(`La edad de Sara es ${studentsData[1][1]} años`)
+
+
+//métodos push y pop añaden u eliminan eleementos
+
+let fruits = ['Banana', 'Orange', 'Apple', 'Mango'];
+fruits.push('Piña');
+console.log(fruits);
+
+
+fruits.pop();
+
+//metodo map
+let myarray = [10, 20, 30];
+let neewArray = myarray.map(number => number + 10);
+console.log(neewArray); //20, 30, 40 Nos deeevuelve un nuevo array mapeado sumando 10
+
+
+let saludo = myarray.map(number => 'hola' + number);
+console.log(saludo); // Hola 10, hola 20, hola 30
+
+
+//for each
+
+myarray.forEach(nombre => consolelog(nombre));
+
+//find nos permite encontrar ene el array el elemento quee proponga nuestro callback
+
+let paises = ['españa', 'argentina'];
+let selected = paises.find(pais => pais == 'españa');
+let selected3 = paises.find(pais => pais.includes('españa'));
+console.log(selected);
+
+//si no encuentra el elemento, retorna Undefined
+
+
+//filter retorna un nuevo array con todos los elementos que eencuentre cumploendo los requerimientos que ponga en el array
+let arraySinFiltrar = ['Argentina_1', 'España', 'Argentina_2', 'Italia', 'Francia'];
+let arrayFiltrado = arraySinFiltrar.filter(pais => pais.includes('Arg'));
+console.log(arrayFiltrado);
+
+
+//spread operator nos permite concatenar-merge dos arrays
+
+let arrayUno = [1, 2, 3];
+let arrayDos = [4, 5, 6];
+let arrayMerged = [...arrayUno, ...arrayDos];
+console.log(arrayMerged);
+
+//copiar o clonar un array
+let copiaArrayUno = [...arrayUno];
 
 
 
