@@ -1,5 +1,5 @@
-//eejrecicios dee arrays
-
+//ejercicios de arrays
+/*
 //1
 let abuelos = ['Maria', 'Jose'];
 let padres = [];
@@ -79,3 +79,55 @@ console.log(arrayCinconumeros);
 let sumaNumeros = arrayCinconumeros[0] + arrayCinconumeros[1] + arrayCinconumeros[2] + arrayCinconumeros[3] + arrayCinconumeros[4];
 
 console.log(sumaNumeros)
+
+*/
+//5 a reesolver aun
+
+let arrayNumerosAleatorios = [];
+
+let primerNumero = parseInt(Math.random() * (100 - 0));
+let segundoNumero = parseInt(Math.random() * (100 - 0));
+let tercerNumero = parseInt(Math.random() * (100 - 0));
+let cuartoNumero = parseInt(Math.random() * (100 - 0));
+let quintoNumero = parseInt(Math.random() * (100 - 0));
+
+arrayNumerosAleatorios.push(primerNumero);
+arrayNumerosAleatorios.push(segundoNumero);
+arrayNumerosAleatorios.push(tercerNumero);
+arrayNumerosAleatorios.push(cuartoNumero);
+arrayNumerosAleatorios.push(quintoNumero);
+
+console.log(arrayNumerosAleatorios);
+
+let arrayOrdenado = [];
+
+for (i in arrayNumerosAleatorios) {
+    let numeroMaximo = 0;
+
+}
+
+
+
+console.log(arrayOrdenado);
+
+//6
+let primerNum = parseInt(prompt('Dime el primer número del array'));
+let segundoNum = parseInt(prompt('Dime el primer número del array'));
+let tercerNum = parseInt(prompt('Dime el primer número del array'));
+
+let arrayNums = [];
+arrayNums.push(primerNum);
+arrayNums.push(segundoNum);
+arrayNums.push(tercerNum);
+
+let arrayImpares = [];
+
+for (num in arrayNums) {
+    if (arrayNums[num] % 2 != 0) {
+        arrayImpares.push(arrayNums[num]);
+    }
+}
+console.log(arrayImpares);
+
+
+
