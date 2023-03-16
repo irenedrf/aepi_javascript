@@ -127,7 +127,7 @@ console.log(comidasFavoritas[0]);
 
 //podemos saber la longitud usando length
 
-consolee.log(comidasFavoritas.length); //3
+console.log(comidasFavoritas.length); //3
 
 //para reemplazar un valor simplemeentee acceedemos a su posición y le asignamos el nuevo valor
 

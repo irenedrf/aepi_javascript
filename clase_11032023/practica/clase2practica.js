@@ -1,5 +1,5 @@
 //ejercicios de arrays
-/*
+
 //1
 let abuelos = ['Maria', 'Jose'];
 let padres = [];
@@ -80,8 +80,8 @@ let sumaNumeros = arrayCinconumeros[0] + arrayCinconumeros[1] + arrayCinconumero
 
 console.log(sumaNumeros)
 
-*/
-//5 a reesolver aun
+
+//5 NO CONSEGUIDO
 
 let arrayNumerosAleatorios = [];
 
@@ -101,19 +101,44 @@ console.log(arrayNumerosAleatorios);
 
 let arrayOrdenado = [];
 
+let numeroMaximo = 0;
+let segundaPosicion = 0;
+let terceraPosicion = 0;
+let cuartaPosicion = 0;
+let quintaPosicion = 0;
+
 for (i in arrayNumerosAleatorios) {
-    let numeroMaximo = 0;
+
+    if (arrayNumerosAleatorios[i] > numeroMaximo) {
+        numeroMaximo = arrayNumerosAleatorios[i];
+    }
+
+
+
+
+    if (arrayNumerosAleatorios[i] < numeroMaximo && arrayNumerosAleatorios[i] > segundaPosicion) {
+        segundaPosicion = arrayNumerosAleatorios[i];
+    }
+
+
+
 
 }
+console.log(numeroMaximo);
+console.log(segundaPosicion);
+arrayOrdenado.push(numeroMaximo);
+arrayOrdenado.push(segundaPosicion);
 
 
 
 console.log(arrayOrdenado);
 
+
 //6
 let primerNum = parseInt(prompt('Dime el primer número del array'));
-let segundoNum = parseInt(prompt('Dime el primer número del array'));
-let tercerNum = parseInt(prompt('Dime el primer número del array'));
+let segundoNum = parseInt(prompt('Dime el segundo número del array'));
+let tercerNum = parseInt(prompt('Dime el tercer número del array'));
+
 
 let arrayNums = [];
 arrayNums.push(primerNum);
@@ -122,7 +147,9 @@ arrayNums.push(tercerNum);
 
 let arrayImpares = [];
 
+
 for (num in arrayNums) {
+
     if (arrayNums[num] % 2 != 0) {
         arrayImpares.push(arrayNums[num]);
     }
@@ -130,4 +157,145 @@ for (num in arrayNums) {
 console.log(arrayImpares);
 
 
+//7
+let primeraPal = prompt('Dime la primera palabra del array');
+let segundaPal = prompt('Dime la segunda palabra del array');
+let terceraPal = prompt('Dime la tercrea palabra del array');
 
+let arrayPals = [primeraPal, segundaPal, terceraPal];
+console.log(arrayPals);
+
+let arrayPalsConA = arrayPals.filter(pal => pal.includes('a'));
+console.log(arrayPalsConA);
+
+
+//8
+let arrayCincoNumsUno = [1, 2, 3, 4, 5];
+let arrayCincoNumsDos = [6, 7, 8, 9, 10];
+let arrayCombinado = [...arrayCincoNumsUno, ...arrayCincoNumsDos]
+console.log(arrayCombinado);
+
+//9 NO CONSEGUIDO
+let palabraUsuarioUno = prompt('Dime una palabra y la ordenaré alfabéticamente');
+let palabraUsuarioDos = prompt('Dime otra palabra y la ordenaré alfabéticamente');
+let palabraUsuarioTres = prompt('Dime otra palabra y la ordenaré alfabéticamente');
+let palabraUsuarioCuatro = prompt('Dime otra palabra y la ordenaré alfabéticamente');
+
+let arrayPalabrasDesordenadas = [palabraUsuarioUno, palabraUsuarioDos, palabraUsuarioTres, palabraUsuarioCuatro];
+
+console.log(arrayPalabrasDesordenadas);
+
+for (i in arrayPalabrasDesordenadas) {
+    let charCode = arrayPalabrasDesordenadas[i];
+
+}
+
+
+
+
+//ejercicios de JavaScript básico que faltan: del 5 al 10
+
+
+//5
+
+let n1 = parseInt(prompt('número1 comparacion'));
+let n2 = parseInt(prompt('número2 comparacion'));
+let n3 = parseInt(prompt('número3 comparacion'));
+
+
+if (n1 > n2) {
+    if (n2 > n3) {
+        console.log(n1 + n2);
+    } else if (n2 < n3) {
+        console.log(n1 + n3);
+    }
+
+} else {
+    if (n1 < n3) {
+        console.log(n2 + n3);
+    } else {
+        console.log(n2 + n1);
+    }
+}
+
+
+
+//6
+let n1promedio = parseInt(prompt('número1 promedio'));
+let n2promedio = parseInt(prompt('número2 promedio'));
+let n3promedio = parseInt(prompt('número3 promedio'));
+
+let promedioNumeros = (n1promedio + n2promedio + n3promedio) / 3;
+
+let resultado = promedioNumeros > 5 ? true : false;
+console.log(resultado);
+
+
+
+//7
+
+let aNacimiento = parseInt(prompt('Dime año de nacimiento y digo tu edad'));
+
+let añoActual = 2023;
+
+let edadCalculada = añoActual - aNacimiento;
+alert('tienes ' + edadCalculada + ' años');
+
+
+//8
+let edadUsu = parseInt(prompt('Dime edad'));
+let generoUsu = confirm('eres mujer?');
+
+if (edadUsu >= 18) {
+    if (generoUsu == true) {
+        let descuentoAplicado = 15;
+        alert('Felicidades, tienes un descuento del ' + descuentoAplicado + '%');
+    } else {
+        let descuentoAplicado = 10;
+        alert('Felicidades, tienes un descuento del ' + descuentoAplicado + '%');
+    }
+} else {
+    alert('Qué pena, no te corrsponde descuento');
+}
+
+//9
+let edadUsu2 = parseInt(prompt('Dime edad'));
+let nombreUsu = prompt('Dime nombre');
+
+if (edadUsu2 >= 18) {
+
+    alert('Eres mayor de edad');
+} else {
+
+    alert('No eres mayor de edad');
+}
+
+if (nombreUsu.length > 5) {
+    alert('Tu nombree tiene más de 5 letras');
+} else {
+    alert('Tu nombre tiene menos de 5 letras');
+}
+
+
+//10
+
+let nota = parseInt(prompt('Dime una nota del 0 al 10'));
+
+console.log(nota);
+
+if (nota >= 0 && nota <= 10) {
+    if (nota >= 0 && nota <= 2) {
+        alert('Insuficiente');
+    } else if (nota >= 3 && nota <= 6) {
+        alert('Suficiente');
+    } else if (nota >= 7 && nota <= 9) {
+        alert('Bien');
+    } else {
+        alert('Excelente');
+    }
+
+
+
+} else {
+    alert('Fuera de rango')
+}
