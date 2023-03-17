@@ -75,7 +75,7 @@ while (!arrayMailsValidos.include('emailInput')) {
 
 }
 
-*/
+
 
 //do while
 //bucle que se eejecuta siempre una primera veez y deespués compara y evalúa si se sigue ejecutando
@@ -101,7 +101,58 @@ let person = {
 
 let itIn = 0;
 for (const key in person) {
-    console.log(`La iteración para el atributo en posición ${itIn} dentro del objeto ${key} tiene el valor de ${person[key]}`);
+    console.log(`La iteración para este objeto en posición ${itIn} dentro del atributo ${key} tiene el valor de ${person[key]}`);
     itIn++;
 };
-//usamos const porquee een este caso todos los elementos son keys en sí mismo. estoy recorriendo el objeto y Key va a tomar eel atributo en cada itereación. Y cada atributo del objeto es único (no puede aparecer dos veces 'nombre' para una misma persona)
+//usamos const porquee een este caso todos los atributos del objeto son keys en sí mismas. estoy recorriendo el objeto y Key va a tomar eel nombre del atributo en cada itereación. Y cada atributo del objeto es único (no puede aparecer dos veces 'nombre' para una misma persona)
+
+//break
+//un break nos saca de inmediato de un bucle
+//continúa el reesto de instrucciones que se enuentran fuera del bucle.
+//podemos usarla cuando una variable toma un determinado valor o cumple una deeteerminada condición
+
+//continue
+//se salta una iteración eespecífica pero no corta eele bucle. Hace que saltemos a la siguiente itereación. por ejeemplo, contamos hasta 10 pero nos queremos saltar el número 3
+
+for (let i = 0; i < 10; i++) {
+    if (i === 3) {
+        continue;
+    }
+    console.log(i);
+}
+
+*/
+
+//funciones
+//sirveen para encapsular una parte del código y permitee reutilizarla a deemanda, cuando es llamada
+//function + nombre función + parámetros separados por coma
+//function myFunction(paramOne,paramTwo){ --cuerpo (lógica) de la función aquí-- return VALOR;}
+//si no especifico el retorno, el retorno va a ser un valor de tipo de dato UNDEFINED porque toda función en JS retorna algo.
+//cualquier código especificado después del return NO será ejecutado. La función termina en el momento en el que encuentra el return.
+//las funciones de JS se cargan ANTES que el resto del código ejecutado, por eso las podemos especificar donde queramos dentro de nuestro script.
+
+
+let miNom = 'Irene';
+
+saludar(miNom);
+
+function saludar(nombre) {
+    return 'Hola ' + nombre;
+}
+
+//en las funciones see pueden espeecificar parámetros opcionales/preedefinidos (tienen un valor default)
+
+function mayor(numA, numB = 10) {
+    if (numA > numB) {
+        console.log(numA);
+    } else {
+        console.log(numB);
+    }
+};
+
+mayor(2); //en eeste caso numB será 10 y evaluará a numB>numA
+mayor(91, 40); //en este caso numB será 40 y evaluará a numB<numA
+
+//el scope de una variable se refiere al bloquee de código donde se eencueentra declarada
+//see puede acceder a una variable var siempre, porque es global. es mejor usar let porquee let tiene un scope local. una variable var sieempree puede accederse a ella incluso si está dentro de la función, declarada como si fuese local. Var está eeen desuso y se desaconseeja su uso
+//por seguridad, hay que trabajar con scope locales
