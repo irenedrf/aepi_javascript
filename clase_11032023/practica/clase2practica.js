@@ -81,7 +81,7 @@ let sumaNumeros = arrayCinconumeros[0] + arrayCinconumeros[1] + arrayCinconumero
 console.log(sumaNumeros)
 
 
-//5 NO CONSEGUIDO
+//5
 
 let arrayNumerosAleatorios = [];
 
@@ -99,39 +99,10 @@ arrayNumerosAleatorios.push(quintoNumero);
 
 console.log(arrayNumerosAleatorios);
 
-let arrayOrdenado = [];
-
-let numeroMaximo = 0;
-let segundaPosicion = 0;
-let terceraPosicion = 0;
-let cuartaPosicion = 0;
-let quintaPosicion = 0;
-
-for (i in arrayNumerosAleatorios) {
-
-    if (arrayNumerosAleatorios[i] > numeroMaximo) {
-        numeroMaximo = arrayNumerosAleatorios[i];
-    }
 
 
+console.log('nums aleatorios ordenados ' + arrayNumerosAleatorios.sort((a, b) => a - b));
 
-
-    if (arrayNumerosAleatorios[i] < numeroMaximo && arrayNumerosAleatorios[i] > segundaPosicion) {
-        segundaPosicion = arrayNumerosAleatorios[i];
-    }
-
-
-
-
-}
-console.log(numeroMaximo);
-console.log(segundaPosicion);
-arrayOrdenado.push(numeroMaximo);
-arrayOrdenado.push(segundaPosicion);
-
-
-
-console.log(arrayOrdenado);
 
 
 //6
@@ -175,7 +146,7 @@ let arrayCincoNumsDos = [6, 7, 8, 9, 10];
 let arrayCombinado = [...arrayCincoNumsUno, ...arrayCincoNumsDos]
 console.log(arrayCombinado);
 
-//9 NO CONSEGUIDO
+//9
 let palabraUsuarioUno = prompt('Dime una palabra y la ordenaré alfabéticamente');
 let palabraUsuarioDos = prompt('Dime otra palabra y la ordenaré alfabéticamente');
 let palabraUsuarioTres = prompt('Dime otra palabra y la ordenaré alfabéticamente');
@@ -183,12 +154,7 @@ let palabraUsuarioCuatro = prompt('Dime otra palabra y la ordenaré alfabéticam
 
 let arrayPalabrasDesordenadas = [palabraUsuarioUno, palabraUsuarioDos, palabraUsuarioTres, palabraUsuarioCuatro];
 
-console.log(arrayPalabrasDesordenadas);
-
-for (i in arrayPalabrasDesordenadas) {
-    let charCode = arrayPalabrasDesordenadas[i];
-
-}
+console.log(arrayPalabrasDesordenadas.sort());
 
 
 
