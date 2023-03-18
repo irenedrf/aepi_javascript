@@ -158,3 +158,38 @@ let prueba = convertirTemperatura(10, "F");
 console.log(prueba);
 
 //2
+
+function calculadora(numA, numB, operador) {
+    switch (operador) {
+        case '+':
+            return numA + numB;
+            break;
+        case '-':
+            return numA - numB;
+            break;
+        case '*':
+            return numA * numB;
+            break;
+        case '/':
+            return numA / numB;
+            break;
+        default:
+            console.log('operación no admitida');
+            break;
+    }
+}
+console.log('Calculadora da ' + calculadora(4, 2, '+'));
+
+//3
+function contarVocales(cadena) {
+    let cantidadVocales = 0;
+    const vocales = 'aeiouAEIOU';
+
+    for (let index = 0; index < cadena.length; index++) {
+        if (vocales.includes(cadena[index])) {
+            cantidadVocales++;
+        }
+    }
+    return cantidadVocales;
+}
+console.log(contarVocales('EsternoCleidoMastoIdeo'));
