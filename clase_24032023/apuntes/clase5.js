@@ -119,6 +119,23 @@ window.addEventListener('load', () => {
 })
 
 //funciona igual, pero mejor, el domcontentloader
-window.addEventListener('DomConteentLoaded', () => {
+window.addEventListener('DomContentLoaded', () => {
     alert('hace lo mismo que el anterior pero eeste funciona meejor porque se asegura quee todo el dom haya sido cargado antes de empezar a eejecutar el script')
 })
+
+//eejemplo de difrncia de valor que reetorna this: een el primeer caso retorna ele objeto een si, en eel segundo caso nos retorna el objeeto
+//moraleeja: si estás usando arrow function, NO usar this. No pueedeee acceder al objeto y sus propiedades
+const button = document.querySelector('button');
+
+button.addEventListener('click', (e) => {
+    console.log(this); //retorna l objeto ene sí, no nos deja accedeer al elemento
+    console.log(e.target) //eequivalentee al this. usamos eel evento (e) y acceedemos a target como propiedad y nos reetorna ele objeto
+    console.lot(e.target.value);
+    e.target.addEventListener('onmouse', () => {
+
+    }); //puedo añadir un evento dentro dle evento
+});
+
+button.addEventListener('click', function () {
+    console.log(this);
+});
