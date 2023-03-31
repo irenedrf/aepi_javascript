@@ -4,7 +4,7 @@
 //parte 3-conectándonos al primer eendpoint
 
 
-
+/*
 const randomRequest = 'https://api.giphy.com/v1/gifs/random?api_key=ANzjWpPE7cOCThA41gVyhwgTmaA51iYU&tag=&rating=g';
 
 fetch(randomRequest)
@@ -25,27 +25,31 @@ fetch(randomRequest)
     })
 
 
-/*
+*/
 
 
-    //parte 4-listando gifs
+//parte 4-listando gifs
 
-    const trendingRequest ='https://api.giphy.com/v1/gifs/trending?api_key=ANzjWpPE7cOCThA41gVyhwgTmaA51iYU&limit=25&rating=g'
-    
-    fetch(trendingRequest)
+const trendingRequest = 'https://api.giphy.com/v1/gifs/trending?api_key=ANzjWpPE7cOCThA41gVyhwgTmaA51iYU&limit=25&rating=g'
+
+fetch(trendingRequest)
     .then(response => response.json())
-    .then(datos => {
-        console.log(datos)
-        console.log(datos.data.title)
+    .then(result => {
+        console.log(result.data)
+        const gifs = result.data;
+        let listGifs = '';
 
 
-        document.createElement("h1").innerText = datos.data.title;
-        //const newTitle = document.createElement("h1");
-        //const newTitle = document.querySelector('h1');
+        gifs.forEach(gif => {
+            listGifs += `
+            <article>
+            <h2>${gif.title}</h2>
+            <img src=${gif.images.original.url}>
+            </article>`
+        });
 
-        // newTitle.innerText = datos.data.title;
+        document.querySelector('section').innerHTML = listGifs;
     })
     .catch(error => {
         console.log(error)
     })
-*/

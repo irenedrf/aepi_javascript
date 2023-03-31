@@ -1,0 +1,18 @@
+.characterList{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.characterList article {
+    width: 200px;
+    height: 400px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
