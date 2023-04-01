@@ -15,6 +15,9 @@ fetch(requestPopularFilms)
     .then(datos => {
 
         const peliculasPop = document.querySelector(".peliculasPopulares");
+        let arrayPelisFavoritas = [];
+
+
 
         for (i = 0; i < datos.results.length; i++) {
             const esParaAdultos = datos.results[i].adult ? 'Cine para adultos' : 'Para todos los públicos';
@@ -24,39 +27,50 @@ fetch(requestPopularFilms)
 
             peliculaPop.innerHTML += `
             <div class="card tarjeta" style="width: 18rem;">
-            <img src="https://image.tmdb.org/t/p/w342/${datos.results[i].poster_path}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">${datos.results[i].title}</h5>
-                <p class="card-text">${datos.results[i].release_date}</p>
-                <p class="card-text">${esParaAdultos}</p>
-                <a href="detalle.html?id=${datos.results[i].id}" class="btn btn-primary">Detalle</a>
-                <a href="#" class="btn btn-success claseFavorito">Añadir a favoritos</a>
+                <img src="https://image.tmdb.org/t/p/w342/${datos.results[i].poster_path}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                    <h5 class="card-title">${datos.results[i].title}</h5>
+                    <p class="card-text">${datos.results[i].release_date}</p>
+                    <p class="card-text">${esParaAdultos}</p>
+                    <a href="detalle.html?id=${datos.results[i].id}" class="btn btn-primary">Detalle</a>
+                    <a href="#" class="btn btn-success claseFavorito">Añadir a favoritos</a>
+                </div>
             </div>
-        </div>
-        `
+            `
 
 
             const fav = peliculaPop.querySelector('.claseFavorito');
 
-            //array favoritos, inicializado vacío
-            let idsPelisFavoritas = [];
+            const idFilm = datos.results[i].id;
+
+
 
             fav.addEventListener('click', (e) => {
                 e.preventDefault();
-                console.log(datos.results[i].id) //este es el fallo, no logro recuperar el id a guardar en eel array
+                console.log(e.target);
 
                 //toggle
                 if (e.target.innerHTML === 'Añadir a favoritos') {
                     e.target.innerHTML = 'Favorito';
-                    //  idsPelisFavoritas.push(datos.results.id); error
+                    //usar local storage para guardar objeto FUNCIONA BIEN PERO SOLO ME GUARDA UNO, DEBO CREAR UN ARRAY PORQUE SE ME SOBREESCRIBEN
+                    console.log('el id del film que guardaremos es ' + idFilm);
+                    arrayPelisFavoritas.push(idFilm);
+                    console.log(arrayPelisFavoritas); //ya tengo el array
 
+
+                    //CORREEGIR D AQUI PARA ABAJO: EEN VEZ DE LOCAL STORAGE DEE UN ITME QUE SE SOBRESCRIBE, HACER STRINGIFY Y LOCALSTORAGE DEEEL ARRAY ENTERO
+                    let idToString = JSON.stringify(idFilm);
+                    localStorage.setItem('filmId', idToString);
 
                 } else {
                     e.target.innerHTML = 'Añadir a favoritos';
-                    //  idsPelisFavoritas.pop(datos.results.id); error
+                    //eliminar objto de local storage
+                    console.log('el id del film que eliminaremos es ' + idFilm);
+                    let idToString = JSON.stringify(idFilm);
+                    localStorage.removeItem('filmId', idToString);
                 }
 
-                console.log(idsPelisFavoritas); //vacio
+
 
 
 
