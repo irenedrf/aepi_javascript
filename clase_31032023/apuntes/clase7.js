@@ -84,7 +84,7 @@ window.addEventListener('load', function () {
             const pelisBuscadas = datos.results;
             const body = document.querySelector('body');
             pelisBuscadas.forEach(element => {
-
+                //no renderiza porquee no tuve tiempo de copiarlo entero
                 document.querySelector('body').innerHTML += `<img src="https://tmdb.org/t/p/w500${element.poster_path}>`
             });
 
