@@ -35,9 +35,9 @@ fetch(requestPeliculaEspecifica)
                                 <h5 class="card-title">${data.title}</h5>
                                 <p class="card-text">${data.release_date}</p>
                                 <p class="card-text">${esParaAdultos}</p>
+                                <p class="card-text">Puntuación media: ${data.vote_average}</p>
+                                <p class="card-text">${data.vote_count} votos</p>
                                 <p class="card-text">${data.overview}</p>
-                                <a href="#" class="btn btn-success claseFavorito">Añadir a favoritos</a>
-                                <p>CONSEGUIR PONER REVIEWS COMO FUNCIONALIDAD EXTRA REQUERIDA AQUI ABAJO</p>
                             </div>
                         </div>
                         </div>

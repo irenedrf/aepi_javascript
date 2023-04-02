@@ -23,7 +23,8 @@ fetch(requestPopularFilms)
             const esParaAdultos = datos.results[i].adult ? 'Cine para adultos' : 'Para todos los públicos';
 
             const peliculaPop = document.createElement('div');
-            peliculaPop.classList.add = 'col-sm mb-4'; //se mee descuadraron los estilos, corregir clases
+            peliculaPop.classList.add("col-sm");
+            peliculaPop.classList.add("mb-4");
 
             peliculaPop.innerHTML += `
             <div class="card tarjeta" style="width: 18rem;">
@@ -47,27 +48,52 @@ fetch(requestPopularFilms)
 
             fav.addEventListener('click', (e) => {
                 e.preventDefault();
-                console.log(e.target);
+
 
                 //toggle
                 if (e.target.innerHTML === 'Añadir a favoritos') {
-                    e.target.innerHTML = 'Favorito';
-                    //usar local storage para guardar objeto FUNCIONA BIEN PERO SOLO ME GUARDA UNO, DEBO CREAR UN ARRAY PORQUE SE ME SOBREESCRIBEN
+                    e.target.innerHTML = 'Quitar de Favoritos';
+
                     console.log('el id del film que guardaremos es ' + idFilm);
+
+                    //guardamos el ID de cada film en el array
                     arrayPelisFavoritas.push(idFilm);
-                    console.log(arrayPelisFavoritas); //ya tengo el array
 
 
-                    //CORREEGIR D AQUI PARA ABAJO: EEN VEZ DE LOCAL STORAGE DEE UN ITME QUE SE SOBRESCRIBE, HACER STRINGIFY Y LOCALSTORAGE DEEEL ARRAY ENTERO
-                    let idToString = JSON.stringify(idFilm);
-                    localStorage.setItem('filmId', idToString);
+
+                    //Stringify del array y guardarlo en LocalStorage
+                    let arrayPelisFavoritasToString = JSON.stringify(arrayPelisFavoritas);
+                    localStorage.setItem("favouriteFilms", arrayPelisFavoritasToString)
+
+
+
+
 
                 } else {
                     e.target.innerHTML = 'Añadir a favoritos';
-                    //eliminar objto de local storage
+
                     console.log('el id del film que eliminaremos es ' + idFilm);
-                    let idToString = JSON.stringify(idFilm);
-                    localStorage.removeItem('filmId', idToString);
+
+
+                    //paso 1: recuperar el array que tenemos guardado en localstorage. Convertirlo a JSON para trabajarlo
+
+                    let filmsRecuperados = JSON.parse(localStorage.getItem("favouriteFilms"));
+
+
+                    //paso 2: borrar el id del array
+
+                    arrayPelisFavoritas = filmsRecuperados.filter(film => film !== idFilm);
+
+
+
+                    //paso 3: sustituir el localstorage por este nuevo array. Stringify del array antes de guardarlo
+                    localStorage.removeItem("favouriteFilms");
+
+                    let arrayActualizadoToString = JSON.stringify(arrayPelisFavoritas);
+                    localStorage.setItem("favouriteFilms", arrayActualizadoToString);
+
+
+
                 }
 
 
