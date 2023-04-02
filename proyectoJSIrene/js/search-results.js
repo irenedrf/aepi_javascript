@@ -10,7 +10,7 @@ window.addEventListener('load', () => {
 
     console.log('la request queda asi: ' + buscarPeliculas);
 
-
+    //A SOLUCIONAR: NO BUSCA SOLO PELICULAS, TAMBIÉN PERSONAS Y OTROS ELEMENTOS, Y ESO DESCOMPENSA TOTALMENTE LAS CARDS, APARECIENDO ELEMENTOS UNDEFINED. BUSCAR SI ESTE ES EL ENDPOINT MÁS ADECUADO O SI MEE CONVIENEE USAR OTRO PARA BUSCAR PELÍCULAS Y SERIES
 
     fetch(buscarPeliculas)
         .then(resp => resp.json())
