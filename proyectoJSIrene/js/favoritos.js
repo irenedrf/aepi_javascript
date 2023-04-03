@@ -50,6 +50,48 @@ window.addEventListener('load', () => {
     });
 
 
+    let listaSeriesFavoritas = JSON.parse(localStorage.getItem("favouriteSeries"));
+    listaSeriesFavoritas.forEach(favorito => {
+        const requestSerie = `https://api.themoviedb.org/3/tv/${favorito}?api_key=2424098daf645db283d946a0fd13247c`
+
+        console.log('la request queda asi: ' + requestSerie);
+
+
+
+        fetch(requestSerie)
+            .then(resp => resp.json())
+            .then(datos => {
+                console.log(datos);
+                //paso 3: imprimir
+                const serieEspecifica = document.querySelector(".misFavoritos");
+
+
+                serieEspecifica.innerHTML += `<div class="col-sm mb-4">
+                <div class="card tarjeta" style="width: 18rem;">
+                <img src="https://image.tmdb.org/t/p/w342/${datos.poster_path}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                    <h5 class="card-title">${datos.name}</h5>
+                        <p class="card-text">${datos.first_air_date}</p>
+                        <p class="card-text">Valoración media: ${datos.vote_average}</p>
+                        <p class="card-text">${datos.vote_count} votos</p>
+                </div>
+                </div>
+            </div>`
+
+
+
+
+
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+
+
+    });
+
+
 
 
 

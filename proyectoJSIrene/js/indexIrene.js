@@ -6,7 +6,7 @@ const requestPopularFilms = "https://api.themoviedb.org/3/movie/popular?api_key=
 
 const requestTopRatedSeries = "https://api.themoviedb.org/3/tv/top_rated?api_key=2424098daf645db283d946a0fd13247c";
 
-//A RESOLVER ENTRE PELIS TOP RATED Y PELIS POPULARES: CUANDO AÑADO FAVORITOS DE UNA DE LAS DOS CATEGORIAS (TOP RATED) Y LUEGO AÑADO UNA DE POPULARES, LA DE POPULARES SOBRESCRIBE TOP RATED Y VICEVERSA. solucionar este comportamiento
+//A RESOLVER ENTRE PELIS TOP RATED Y PELIS POPULARES: CUANDO AÑADO FAVORITOS DE UNA DE LAS DOS CATEGORIAS (TOP RATED) Y LUEGO AÑADO UNA DE POPULARES, LA DE POPULARES SOBRESCRIBE TOP RATED Y VICEVERSA. solucionar este comportamiento (solucionado solo parcialmentee)
 
 //películas top rated
 fetch(requestTopRatedFilms)
@@ -55,16 +55,11 @@ fetch(requestTopRatedFilms)
 
                     console.log('el id del film que guardaremos es ' + idFilm);
 
-                    //guardamos el ID de cada film en el array
                     arrayPelisFavoritas.push(idFilm);
 
 
-
-                    //Stringify del array y guardarlo en LocalStorage
                     let arrayPelisFavoritasToString = JSON.stringify(arrayPelisFavoritas);
                     localStorage.setItem("favouriteFilms", arrayPelisFavoritasToString)
-
-
 
 
 
@@ -74,29 +69,19 @@ fetch(requestTopRatedFilms)
                     console.log('el id del film que eliminaremos es ' + idFilm);
 
 
-                    //paso 1: recuperar el array que tenemos guardado en localstorage. Convertirlo a JSON para trabajarlo
-
                     let filmsRecuperados = JSON.parse(localStorage.getItem("favouriteFilms"));
 
-
-                    //paso 2: borrar el id del array
 
                     arrayPelisFavoritas = filmsRecuperados.filter(film => film !== idFilm);
 
 
-
-                    //paso 3: sustituir el localstorage por este nuevo array. Stringify del array antes de guardarlo
                     localStorage.removeItem("favouriteFilms");
 
                     let arrayActualizadoToString = JSON.stringify(arrayPelisFavoritas);
                     localStorage.setItem("favouriteFilms", arrayActualizadoToString);
 
 
-
                 }
-
-
-
 
 
             });
@@ -147,7 +132,6 @@ fetch(requestPopularFilms)
             </div>
             `
 
-
             const fav = peliculaPop.querySelector('.claseFavorito');
 
             const idFilm = datos.results[i].id;
@@ -164,16 +148,14 @@ fetch(requestPopularFilms)
 
                     console.log('el id del film que guardaremos es ' + idFilm);
 
-                    //guardamos el ID de cada film en el array
                     arrayPelisFavoritas.push(idFilm);
 
-
-
                     //Stringify del array y guardarlo en LocalStorage
-                    let arrayPelisFavoritasToString = JSON.stringify(arrayPelisFavoritas);
-                    localStorage.setItem("favouriteFilms", arrayPelisFavoritasToString)
+                    //let arrayPelisFavoritasToString = JSON.stringify(arrayPelisFavoritas);
+                    //localStorage.setItem("favouriteFilms", arrayPelisFavoritasToString);
 
 
+                    verificarSiLocalStorageExiste(arrayPelisFavoritas);
 
 
 
@@ -183,36 +165,23 @@ fetch(requestPopularFilms)
                     console.log('el id del film que eliminaremos es ' + idFilm);
 
 
-                    //paso 1: recuperar el array que tenemos guardado en localstorage. Convertirlo a JSON para trabajarlo
-
                     let filmsRecuperados = JSON.parse(localStorage.getItem("favouriteFilms"));
 
-
-                    //paso 2: borrar el id del array
 
                     arrayPelisFavoritas = filmsRecuperados.filter(film => film !== idFilm);
 
 
-
-                    //paso 3: sustituir el localstorage por este nuevo array. Stringify del array antes de guardarlo
                     localStorage.removeItem("favouriteFilms");
 
                     let arrayActualizadoToString = JSON.stringify(arrayPelisFavoritas);
                     localStorage.setItem("favouriteFilms", arrayActualizadoToString);
 
-
-
                 }
-
-
-
-
 
             });
 
             peliculasPop.appendChild(peliculaPop);
         }
-
 
 
 
@@ -223,16 +192,8 @@ fetch(requestPopularFilms)
 
 
 
-
-
-
-
-
-
-
-
 //series más valoradas
-//A RESOLVER: 1) BOTON FAVORITOS NO FUNCIONA 2) BOTON DETALLE ME LLEVA A UNA PELI EN VEZ DE A ESTA SERIE
+//A RESOLVER: 2) BOTON DETALLE ME LLEVA A UNA PELI EN VEZ DE A ESTA SERIE es porque el request es de movies en detalle.js, pero como hago para identificar quee esto es de una serie??
 
 
 fetch(requestTopRatedSeries)
@@ -282,16 +243,11 @@ fetch(requestTopRatedSeries)
 
                     console.log('el id dela serie que guardaremos es ' + idSerie);
 
-                    //guardamos el ID de cada serie en el array
                     arraySeriesFavoritas.push(idSerie);
 
 
-
-                    //Stringify del array y guardarlo en LocalStorage
                     let arraySeriesFavoritasToString = JSON.stringify(arraySeriesFavoritas);
                     localStorage.setItem("favouriteSeries", arraySeriesFavoritasToString)
-
-
 
 
 
@@ -300,29 +256,16 @@ fetch(requestTopRatedSeries)
 
                     console.log('el id de la serie que eliminaremos es ' + idSerie);
 
-
-                    //paso 1: recuperar el array que tenemos guardado en localstorage. Convertirlo a JSON para trabajarlo
-
                     let seriesRecuperadas = JSON.parse(localStorage.getItem("favouriteSeries"));
-
-
-                    //paso 2: borrar el id del array
 
                     arraySeriesFavoritas = seriesRecuperadas.filter(serie => serie !== idSerie);
 
-
-
-                    //paso 3: sustituir el localstorage por este nuevo array. Stringify del array antes de guardarlo
                     localStorage.removeItem("favouriteSeries");
 
                     let arrayActualizadoToString = JSON.stringify(arraySeriesFavoritas);
                     localStorage.setItem("favouriteSeries", arrayActualizadoToString);
 
-
-
                 }
-
-
 
 
 
@@ -340,3 +283,20 @@ fetch(requestTopRatedSeries)
     })
 
 
+function verificarSiLocalStorageExiste(arrayPeliculas) {
+    let filmsGuardados = JSON.parse(localStorage.getItem("favouriteFilms"));
+
+    if (filmsGuardados) {
+
+        let actualizarListaFilms = [...filmsGuardados, ...arrayPeliculas];
+
+        let actualizarListaToString = JSON.stringify(actualizarListaFilms);
+        localStorage.setItem("favouriteFilms", actualizarListaToString);
+    } else {
+
+        let arrayPeliculasToString = JSON.stringify(arrayPeliculas);
+        localStorage.setItem("favouriteFilms", arrayPeliculasToString);
+    }
+}
+
+//si tengo tiempo: reparar esta función. al concatenar los arrays, estoy concatenando repeetidos 

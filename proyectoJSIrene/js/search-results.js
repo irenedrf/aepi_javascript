@@ -6,18 +6,24 @@ window.addEventListener('load', () => {
     console.log(resultado);
 
     //fetch para reecuperar las películas que tengan este criterio de búsqueda por nombre
-    const buscarPeliculas = `https://api.themoviedb.org/3/search/multi?api_key=2424098daf645db283d946a0fd13247c&query=${resultado}&page=1`;
+    const buscarPeliculas = `https://api.themoviedb.org/3/search/movie?api_key=2424098daf645db283d946a0fd13247c&query=${resultado}&page=1`;
 
     console.log('la request queda asi: ' + buscarPeliculas);
 
-    //A SOLUCIONAR: NO BUSCA SOLO PELICULAS, TAMBIÉN PERSONAS Y OTROS ELEMENTOS, Y ESO DESCOMPENSA TOTALMENTE LAS CARDS, APARECIENDO ELEMENTOS UNDEFINED. BUSCAR SI ESTE ES EL ENDPOINT MÁS ADECUADO O SI MEE CONVIENEE USAR OTRO PARA BUSCAR PELÍCULAS Y SERIES
+
 
     fetch(buscarPeliculas)
         .then(resp => resp.json())
         .then(data => {
             console.log(data.results);
-            //paso 3: imprimir
+
             const peliEspecifica = document.querySelector(".resultadosBusqueda");
+            const tit = document.querySelector(".tituloBusqueda");
+
+            const titulo = document.createElement('h1');
+            titulo.classList.add('mb-5');
+            titulo.innerText = `Resultados de tu búsqueda para ${resultado}`;
+            tit.appendChild(titulo);
 
             data.results.forEach(result => {
                 const esParaAdultos = result.adult ? 'Cine para adultos' : 'Para todos los públicos';
