@@ -6,7 +6,8 @@ const requestPopularFilms = "https://api.themoviedb.org/3/movie/popular?api_key=
 
 const requestTopRatedSeries = "https://api.themoviedb.org/3/tv/top_rated?api_key=2424098daf645db283d946a0fd13247c";
 
-//A RESOLVER ENTRE PELIS TOP RATED Y PELIS POPULARES: CUANDO AÑADO FAVORITOS DE UNA DE LAS DOS CATEGORIAS (TOP RATED) Y LUEGO AÑADO UNA DE POPULARES, LA DE POPULARES SOBRESCRIBE TOP RATED Y VICEVERSA. solucionar este comportamiento (solucionado solo parcialmentee)
+
+
 
 //películas top rated
 fetch(requestTopRatedFilms)
@@ -43,7 +44,32 @@ fetch(requestTopRatedFilms)
 
             const idFilm = datos.results[i].id;
 
+            let recuperamosLocalStorageTop = JSON.parse(localStorage.getItem("favouriteTopFilms"));
+            let textoBoton = '';
+            console.log('recupero ' + recuperamosLocalStorageTop)
 
+            if (!recuperamosLocalStorageTop) {
+                textoBoton = 'Añadir a favoritos';
+            } else {
+                let encontrado = recuperamosLocalStorageTop.find(film => film == idFilm);
+                console.log(encontrado);
+                if (encontrado) {
+                    textoBoton = 'Quitar de favoritos'
+                } else {
+                    textoBoton = 'Añadir a favoritos'
+                }
+            }
+
+            /*
+            let encontrado=recuperamosLocalStorageTop.find(idFilm);
+            let textoBoton='';
+            if(encontrado){
+                textoBoton='Quitar de favoritos';
+            }else{
+                textoBoton='>Añadir a favoritos';
+            }
+
+*/
 
             fav.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -59,7 +85,7 @@ fetch(requestTopRatedFilms)
 
 
                     let arrayPelisFavoritasToString = JSON.stringify(arrayPelisFavoritas);
-                    localStorage.setItem("favouriteFilms", arrayPelisFavoritasToString)
+                    localStorage.setItem("favouriteTopFilms", arrayPelisFavoritasToString)
 
 
 
@@ -69,16 +95,16 @@ fetch(requestTopRatedFilms)
                     console.log('el id del film que eliminaremos es ' + idFilm);
 
 
-                    let filmsRecuperados = JSON.parse(localStorage.getItem("favouriteFilms"));
+                    let filmsRecuperados = JSON.parse(localStorage.getItem("favouriteTopFilms"));
 
 
                     arrayPelisFavoritas = filmsRecuperados.filter(film => film !== idFilm);
 
 
-                    localStorage.removeItem("favouriteFilms");
+                    localStorage.removeItem("favouriteTopFilms");
 
                     let arrayActualizadoToString = JSON.stringify(arrayPelisFavoritas);
-                    localStorage.setItem("favouriteFilms", arrayActualizadoToString);
+                    localStorage.setItem("favouriteTopFilms", arrayActualizadoToString);
 
 
                 }
@@ -151,11 +177,10 @@ fetch(requestPopularFilms)
                     arrayPelisFavoritas.push(idFilm);
 
                     //Stringify del array y guardarlo en LocalStorage
-                    //let arrayPelisFavoritasToString = JSON.stringify(arrayPelisFavoritas);
-                    //localStorage.setItem("favouriteFilms", arrayPelisFavoritasToString);
+                    let arrayPelisFavoritasToString = JSON.stringify(arrayPelisFavoritas);
+                    localStorage.setItem("favouritePopFilms", arrayPelisFavoritasToString);
 
 
-                    verificarSiLocalStorageExiste(arrayPelisFavoritas);
 
 
 
@@ -165,16 +190,16 @@ fetch(requestPopularFilms)
                     console.log('el id del film que eliminaremos es ' + idFilm);
 
 
-                    let filmsRecuperados = JSON.parse(localStorage.getItem("favouriteFilms"));
+                    let filmsRecuperados = JSON.parse(localStorage.getItem("favouritePopFilms"));
 
 
                     arrayPelisFavoritas = filmsRecuperados.filter(film => film !== idFilm);
 
 
-                    localStorage.removeItem("favouriteFilms");
+                    localStorage.removeItem("favouritePopFilms");
 
                     let arrayActualizadoToString = JSON.stringify(arrayPelisFavoritas);
-                    localStorage.setItem("favouriteFilms", arrayActualizadoToString);
+                    localStorage.setItem("favouritePopFilms", arrayActualizadoToString);
 
                 }
 
@@ -193,7 +218,6 @@ fetch(requestPopularFilms)
 
 
 //series más valoradas
-//A RESOLVER: 2) BOTON DETALLE ME LLEVA A UNA PELI EN VEZ DE A ESTA SERIE es porque el request es de movies en detalle.js, pero como hago para identificar quee esto es de una serie??
 
 
 fetch(requestTopRatedSeries)
@@ -212,6 +236,8 @@ fetch(requestTopRatedSeries)
             peliculaPop.classList.add("col-sm");
             peliculaPop.classList.add("mb-4");
 
+            //antes de añadir el toggle del event listener hay que saber si ya tenemos la película en favoritos. Recuperamos el localstorage y verificamos. El texto del botón es dinámico según si encontremos o no el ID de la película
+
             peliculaPop.innerHTML += `
             <div class="card tarjeta" style="width: 18rem;">
                 <img src="https://image.tmdb.org/t/p/w342/${datos.results[i].poster_path}" class="card-img-top" alt="...">
@@ -220,7 +246,7 @@ fetch(requestTopRatedSeries)
                         <p class="card-text">${datos.results[i].first_air_date}</p>
                         <p class="card-text">Valoración media: ${datos.results[i].vote_average}</p>
                         <p class="card-text">${datos.results[i].vote_count} votos</p>
-                    <a href="detalle.html?id=${datos.results[i].id}" class="btn btn-primary">Detalle</a>
+                    <a href="detalleSerie.html?id=${datos.results[i].id}" class="btn btn-primary">Detalle</a>
                     <a href="#" class="btn btn-success claseFavorito">Añadir a favoritos</a>
                 </div>
             </div>
@@ -230,6 +256,7 @@ fetch(requestTopRatedSeries)
             const fav = peliculaPop.querySelector('.claseFavorito');
 
             const idSerie = datos.results[i].id;
+
 
 
 
@@ -282,21 +309,3 @@ fetch(requestTopRatedSeries)
         console.log(error)
     })
 
-
-function verificarSiLocalStorageExiste(arrayPeliculas) {
-    let filmsGuardados = JSON.parse(localStorage.getItem("favouriteFilms"));
-
-    if (filmsGuardados) {
-
-        let actualizarListaFilms = [...filmsGuardados, ...arrayPeliculas];
-
-        let actualizarListaToString = JSON.stringify(actualizarListaFilms);
-        localStorage.setItem("favouriteFilms", actualizarListaToString);
-    } else {
-
-        let arrayPeliculasToString = JSON.stringify(arrayPeliculas);
-        localStorage.setItem("favouriteFilms", arrayPeliculasToString);
-    }
-}
-
-//si tengo tiempo: reparar esta función. al concatenar los arrays, estoy concatenando repeetidos 

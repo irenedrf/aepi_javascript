@@ -24,14 +24,20 @@ window.addEventListener('load', () => {
 
             const peliEspecifica = document.querySelector(".detallePelicula");
 
+            const listaGeneros = [];
+            data.genres.forEach(genero => {
+                listaGeneros.push(genero.name)
+            });
 
             const esParaAdultos = data.adult ? 'Cine para adultos' : 'Para todos los públicos';
+            const imagen = data.poster_path === null ? 'assets/vector_interrogante_fallback_img.png' : `https://image.tmdb.org/t/p/w342/${data.poster_path}`;
 
             peliEspecifica.innerHTML += `<div class="row d-flex justify-content-center">
                             <div class="card" style="width: 20rem;">
-                            <img src="https://image.tmdb.org/t/p/w342/${data.poster_path}" class="card-img-top" alt="...">
+                            <img src="${imagen}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">${data.title}</h5>
+                                <p class="card-text">Categorías: ${listaGeneros}</p>
                                 <p class="card-text">${data.release_date}</p>
                                 <p class="card-text">${esParaAdultos}</p>
                                 <p class="card-text">Puntuación media: ${data.vote_average}</p>
@@ -63,10 +69,13 @@ window.addEventListener('load', () => {
                     fetch(requestReviews)
                         .then(resp => resp.json())
                         .then(datos => {
-                            console.log(datos.results);
+                            //console.log(datos.results);
                             //imprimimos solo tres opiniones para que no se haga muy largo
-                            for (i = 0; i < 3; i++) {
-                                divOculto.innerHTML += `<div class="container-fluid border border-danger rounded-5 m-4 p-3">
+                            if (datos.length > 0) {
+
+
+                                for (i = 0; i < 3; i++) {
+                                    divOculto.innerHTML += `<div class="container-fluid border border-danger rounded-5 m-4 p-3">
                                 <p class="fw-bold">Autor</p>
                                 <p>${datos.results[i].author}</p>
                                 <p class="fw-bold">Reseña</p>
@@ -74,8 +83,11 @@ window.addEventListener('load', () => {
                                 <p class="fw-bold">Fecha</p>
                                 <p>${datos.results[i].created_at}</p>
                                 </div>`
+                                }
+                            } else {
+                                divOculto.innerHTML = `<div class="container-fluid border border-danger rounded-5 m-4 p-3">
+                                <p class="fw-bold">Lo sentimos, aún no hay reseñas para este título</p></div>`
                             }
-
 
 
                         })
