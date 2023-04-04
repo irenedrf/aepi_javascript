@@ -26,22 +26,6 @@ fetch(requestTopRatedFilms)
             peliculaPop.classList.add("col-sm");
             peliculaPop.classList.add("mb-4");
 
-            peliculaPop.innerHTML += `
-            <div class="card tarjeta" style="width: 18rem;">
-                <img src="https://image.tmdb.org/t/p/w342/${datos.results[i].poster_path}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                    <h5 class="card-title">${datos.results[i].title}</h5>
-                    <p class="card-text">${datos.results[i].release_date}</p>
-                    <p class="card-text">${esParaAdultos}</p>
-                    <a href="detalle.html?id=${datos.results[i].id}" class="btn btn-primary">Detalle</a>
-                    <a href="#" class="btn btn-success claseFavorito">Añadir a favoritos</a>
-                </div>
-            </div>
-            `
-
-
-            const fav = peliculaPop.querySelector('.claseFavorito');
-
             const idFilm = datos.results[i].id;
 
             let recuperamosLocalStorageTop = JSON.parse(localStorage.getItem("favouriteTopFilms"));
@@ -60,16 +44,23 @@ fetch(requestTopRatedFilms)
                 }
             }
 
-            /*
-            let encontrado=recuperamosLocalStorageTop.find(idFilm);
-            let textoBoton='';
-            if(encontrado){
-                textoBoton='Quitar de favoritos';
-            }else{
-                textoBoton='>Añadir a favoritos';
-            }
+            peliculaPop.innerHTML += `
+            <div class="card tarjeta" style="width: 18rem;">
+                <img src="https://image.tmdb.org/t/p/w342/${datos.results[i].poster_path}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                    <h5 class="card-title">${datos.results[i].title}</h5>
+                    <p class="card-text">${datos.results[i].release_date}</p>
+                    <p class="card-text">${esParaAdultos}</p>
+                    <a href="detalle.html?id=${datos.results[i].id}" class="btn btn-primary">Detalle</a>
+                    <a href="#" class="btn btn-success claseFavorito">${textoBoton}</a>
+                </div>
+            </div>
+            `
 
-*/
+
+            const fav = peliculaPop.querySelector('.claseFavorito');
+
+
 
             fav.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -145,6 +136,24 @@ fetch(requestPopularFilms)
             peliculaPop.classList.add("col-sm");
             peliculaPop.classList.add("mb-4");
 
+            const idFilm = datos.results[i].id;
+
+            let recuperamosLocalStoragePop = JSON.parse(localStorage.getItem("favouritePopFilms"));
+            let textoBoton = '';
+            console.log('recupero ' + recuperamosLocalStoragePop)
+
+            if (!recuperamosLocalStoragePop) {
+                textoBoton = 'Añadir a favoritos';
+            } else {
+                let encontrado = recuperamosLocalStoragePop.find(film => film == idFilm);
+                console.log(encontrado);
+                if (encontrado) {
+                    textoBoton = 'Quitar de favoritos'
+                } else {
+                    textoBoton = 'Añadir a favoritos'
+                }
+            }
+
             peliculaPop.innerHTML += `
             <div class="card tarjeta" style="width: 18rem;">
                 <img src="https://image.tmdb.org/t/p/w342/${datos.results[i].poster_path}" class="card-img-top" alt="...">
@@ -153,14 +162,14 @@ fetch(requestPopularFilms)
                     <p class="card-text">${datos.results[i].release_date}</p>
                     <p class="card-text">${esParaAdultos}</p>
                     <a href="detalle.html?id=${datos.results[i].id}" class="btn btn-primary">Detalle</a>
-                    <a href="#" class="btn btn-success claseFavorito">Añadir a favoritos</a>
+                    <a href="#" class="btn btn-success claseFavorito">${textoBoton}</a>
                 </div>
             </div>
             `
 
             const fav = peliculaPop.querySelector('.claseFavorito');
 
-            const idFilm = datos.results[i].id;
+
 
 
 
@@ -236,6 +245,25 @@ fetch(requestTopRatedSeries)
             peliculaPop.classList.add("col-sm");
             peliculaPop.classList.add("mb-4");
 
+
+            const idSerie = datos.results[i].id;
+
+            let recuperamosLocalStorageSeries = JSON.parse(localStorage.getItem("favouriteSeries"));
+            let textoBoton = '';
+            console.log('recupero ' + recuperamosLocalStorageSeries)
+
+            if (!recuperamosLocalStorageSeries) {
+                textoBoton = 'Añadir a favoritos';
+            } else {
+                let encontrado = recuperamosLocalStorageSeries.find(serie => serie == idSerie);
+                console.log(encontrado);
+                if (encontrado) {
+                    textoBoton = 'Quitar de favoritos'
+                } else {
+                    textoBoton = 'Añadir a favoritos'
+                }
+            }
+
             //antes de añadir el toggle del event listener hay que saber si ya tenemos la película en favoritos. Recuperamos el localstorage y verificamos. El texto del botón es dinámico según si encontremos o no el ID de la película
 
             peliculaPop.innerHTML += `
@@ -247,7 +275,7 @@ fetch(requestTopRatedSeries)
                         <p class="card-text">Valoración media: ${datos.results[i].vote_average}</p>
                         <p class="card-text">${datos.results[i].vote_count} votos</p>
                     <a href="detalleSerie.html?id=${datos.results[i].id}" class="btn btn-primary">Detalle</a>
-                    <a href="#" class="btn btn-success claseFavorito">Añadir a favoritos</a>
+                    <a href="#" class="btn btn-success claseFavorito">${textoBoton}</a>
                 </div>
             </div>
             `
@@ -255,7 +283,7 @@ fetch(requestTopRatedSeries)
 
             const fav = peliculaPop.querySelector('.claseFavorito');
 
-            const idSerie = datos.results[i].id;
+
 
 
 
